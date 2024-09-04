@@ -15,6 +15,9 @@
    
 }
 
+.search, .search-result{
+    width: 361px;
+}
 
 .search {
     position: relative;
@@ -82,4 +85,9 @@ input:not(:placeholder-shown) ~ .search-btn{
         background-color: rgba(22, 24, 35, 0.15);
     }
 
+}
+.search-title{
+    color: rgba(22, 24, 35, 0.75);
+    font-size: 1.4rem;
+    font-weight: 600;
 }
