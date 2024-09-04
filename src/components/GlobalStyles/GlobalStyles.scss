@@ -9,7 +9,33 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+  color: var(--text-color)
 }
-*{
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  --default-layout-header-height: 60px;
+  --default-layout-width: 1150px;
+  //color 
+  --black: #000;
+  --text-color: #333;
+  
+  --search-height: 46px;
+  --search-top-spacer: 9px;
+ --search-button-width: 52px;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
 }
