@@ -1,7 +1,7 @@
 .wrapper{
     width: 100%;
     height: var(--default-layout-header-height);
-    box-shadow: 0 1px 1px rgb(0 0 0/ 12%);
+    box-shadow: 0 1px 1px rgba(0 0 0/ 12%);
     display: flex;
     justify-content: center;
 }
@@ -90,4 +90,10 @@ input:not(:placeholder-shown) ~ .search-btn{
     color: rgba(22, 24, 35, 0.75);
     font-size: 1.4rem;
     font-weight: 600;
+}
+.actions{
+    display: flex;
+}
+.custom-login{
+    color: red;
 }
