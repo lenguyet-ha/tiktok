@@ -10,11 +10,14 @@
     width: 100%;
     justify-content: flex-start;
     border-radius: 0;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 18px;
      padding: 11px 16px;
     &:hover{
         background-color: rgba(22, 24, 35, 0.04);
+    }
+    &.separate{
+        border-top: 1px solid rgba(152, 139, 139, 0.366);
     }
 }
 
@@ -37,3 +40,4 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
