@@ -102,6 +102,8 @@ input:not(:placeholder-shown) ~ .search-btn{
 .actions{
     display: flex;
     align-items: center;
+    
+    justify-content: center;
 }
 .more-btn{
     margin-left: 28px;
@@ -115,6 +117,14 @@ input:not(:placeholder-shown) ~ .search-btn{
     font-size: 2.2rem;
     color: #161823;
     padding: 4px 12px;
+   
+}
+.action-btn-upload{
+    background-color: transparent;
+    font-size: 2.2rem;
+    color: #161823;
+    padding: 4px 10px;
+    transform: translateY(-5px);
 }
 
 .user-avatar{
