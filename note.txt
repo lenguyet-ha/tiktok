@@ -1,0 +1,5 @@
+https://tiktok.fullstack.edu.vn/api/users/search?q=haa&type=less
+giao thức: https
+host name: tiktok.fullstack.edu.vn
+path: api/users/search
+query parameter: q=haa&type=less

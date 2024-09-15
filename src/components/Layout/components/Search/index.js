@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '~/components/Icons';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -14,40 +15,58 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showResult, setShowResult] = useState(true)
+  const [showResult, setShowResult] = useState(true);
   const inputRef = useRef();
 
-  useEffect(() => {
-    if (searchValue) {
-      setLoading(true);
+  const debounced = useDebounce(searchValue, 500);
 
-      const timer = setTimeout(() => {
-        setLoading(false);
-        setSearchResult([1]);
-      }, 200);
-      return () => clearTimeout(timer)  // clean up function
-    } else {
+  // useEffect(() => {
+  //   if (searchValue) {
+  //     setLoading(true);
+
+  //     const timer = setTimeout(() => {
+  //       setLoading(false);
+  //       setSearchResult([1]);
+  //     }, 200);
+  //     return () => clearTimeout(timer)  // clean up function
+  //   } else {
+  //     setSearchResult([]);
+  //   }
+  // }, [searchValue]);
+
+  useEffect(() => {
+    if (!debounced.trim()) {
+      setLoading(false);
       setSearchResult([]);
+    } else {
+      setLoading(true);
+      fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        .then((res) => res.json())
+        .then((res) => {
+          setSearchResult(res.data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
     }
-  }, [searchValue]);
+  }, [debounced]);
 
   return (
     <HeadlessTippy
       interactive
-      visible={ showResult && searchResult.length > 0}
+      visible={showResult && searchResult.length > 0}
       render={(attrs) => (
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <h4 className={cx('search-title')}>Acounts</h4>
-            <AccountItem />
-            <AccountItem />
-            <AccountItem />
-            <AccountItem />
+            {searchResult.map((result, index) => (
+              <AccountItem key={index} data={result} />
+            ))}
           </PopperWrapper>
         </div>
       )}
-      onClickOutside={()=>{setShowResult(false)}}
-  
+      onClickOutside={() => {
+        setShowResult(false);
+      }}
     >
       <div className={cx('search')}>
         <input
@@ -57,7 +76,9 @@ function Search() {
           onChange={(e) => {
             setSearchValue(e.target.value);
           }}
-          onFocus={()=>{setShowResult(true)}}
+          onFocus={() => {
+            setShowResult(true);
+          }}
         ></input>
 
         {loading ? (
